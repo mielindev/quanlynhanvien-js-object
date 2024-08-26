@@ -2,8 +2,20 @@ var DSNV = [];
 
 var dataJson = localStorage.getItem("DSNV_JSON");
 if (dataJson != null) {
-    DSNV = JSON.parse(dataJson);
-  console.log("DSNV:", DSNV);
+  var dataArr = JSON.parse(dataJson);
+  DSNV = dataArr.map((item) => {
+    var nv = new NhanVien(
+      item.id,
+      item.ten,
+      item.email,
+      item.matKhau,
+      item.ngayLam,
+      item.luongCb,
+      item.chucVu,
+      item.gioLam
+    );
+    return nv;
+  });
   renderDSNV(DSNV);
 }
 
@@ -28,6 +40,16 @@ function themNv() {
   );
   DSNV.push(nv);
   //   lưu trữ localstorage
+  var dataJson = JSON.stringify(DSNV);
+  localStorage.setItem("DSNV_JSON", dataJson);
+  renderDSNV(DSNV);
+}
+
+function xoaNv(tk) {
+  var index = DSNV.findIndex((item) => {
+    return item.id == tk;
+  });
+  DSNV.splice(index, 1);
   var dataJson = JSON.stringify(DSNV);
   localStorage.setItem("DSNV_JSON", dataJson);
   renderDSNV(DSNV);

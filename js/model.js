@@ -19,12 +19,12 @@ function NhanVien(
     (this.gioLam = _gioLam);
   this.tongLuong = () => {
     if (this.chucVu == "Sếp") {
-      return `${this.luongCb * 3}$`;
+      return `${(this.luongCb * 3).toLocaleString()}`;
     }
     if (this.chucVu == "Trưởng phòng") {
-      return `${this.luongCb * 2}$`;
+      return `${(this.luongCb * 2).toLocaleString()}`;
     }
-    return `${this.luongCb}$`;
+    return `${this.luongCb.toLocaleString()}`;
   };
   this.xepLoai = () => {
     if (this.gioLam >= 192) {
@@ -33,7 +33,6 @@ function NhanVien(
       return "Nhân viên giỏi";
     } else if (this.gioLam >= 160) {
       return "Nhân viên khá";
-    }
-    return "Nhân viên trung bình";
+    } else return "Nhân viên trung bình";
   };
 }

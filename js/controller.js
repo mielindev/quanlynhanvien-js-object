@@ -1,8 +1,3 @@
-// Lớp đối tượng
-// function layThongTinTuForm() {
-
-// }
-
 // Hiện thị thông tin
 function renderDSNV(dsnv) {
   var contentHTML = "";
@@ -14,8 +9,12 @@ function renderDSNV(dsnv) {
         <td>${nv.email}</td>
         <td>${nv.ngayLam}</td>
         <td>${nv.chucVu}</td>
-        <td>0</td>
-        <td>Giỏi</td>
+        <td>${nv.tongLuong()}</td>
+        <td>${nv.xepLoai()}</td>
+        <td> 
+          <button onclick="suaNv(${nv.id})" class="btn btn-warning">Sửa</button>
+          <button onclick="xoaNv(${nv.id})" class="btn btn-danger">Xóa</button>
+        </td>
     </tr>`;
     contentHTML += trString;
   }
