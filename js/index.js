@@ -20,24 +20,7 @@ if (dataJson != null) {
 }
 
 function themNv() {
-  var id = document.getElementById("tknv").value;
-  var ten = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  var matKhau = document.getElementById("password").value;
-  var ngayLam = document.getElementById("datepicker").value;
-  var luongCb = document.getElementById("luongCB").value * 1;
-  var chucVu = document.getElementById("chucvu").value;
-  var gioLam = document.getElementById("gioLam").value * 1;
-  var nv = new NhanVien(
-    id,
-    ten,
-    email,
-    matKhau,
-    ngayLam,
-    luongCb,
-    chucVu,
-    gioLam
-  );
+  var nv = layThongTinTuForm();
   DSNV.push(nv);
   //   lưu trữ localstorage
   var dataJson = JSON.stringify(DSNV);
@@ -54,3 +37,71 @@ function xoaNv(tk) {
   localStorage.setItem("DSNV_JSON", dataJson);
   renderDSNV(DSNV);
 }
+
+function suaNv(tk) {
+  var index = DSNV.findIndex((item) => {
+    return item.id == tk;
+  });
+  var nv = DSNV[index];
+  hienThiThongTin(nv);
+  document.getElementById("tknv").disabled = true;
+}
+
+function capNhatNv() {
+  var nv = layThongTinTuForm();
+  var index = DSNV.findIndex((item) => {
+    return item.id == nv.id;
+  });
+  DSNV[index] = nv;
+  var dataJson = JSON.stringify(DSNV);
+  localStorage.setItem("DSNV_JSON", dataJson);
+  clearForm();
+  renderDSNV(DSNV);
+}
+
+function timNv() {
+  var nameArr = [];
+  var contentHTML = " ";
+  var xepLoaiValue = document.querySelector("#searchName").value;
+  for (var i = 0; i < DSNV.length; i++) {
+    console.log(DSNV[i].xepLoai());
+    if (DSNV[i].xepLoai() === xepLoaiValue) {
+      nameArr.push(DSNV[i].ten);
+    }
+  }
+
+  for (var i = 0; i < nameArr.length; i++) {
+    contentHTML += i + 1 + ". " + nameArr[i] + `<br />`;
+  }
+
+  document.querySelector("#ulPhanTrang").innerHTML = contentHTML;
+}
+
+Validator({
+  form: "#form-1",
+  rules: [
+    Validator.isRequired("#tknv", "Vui lòng nhập tài khoản"),
+    Validator.isNumber("#tknv", "Tài khoản phải có độ dài từ 4 - 6 ký số"),
+    Validator.isText("#name", "Vui lòng nhập họ và tên"),
+    Validator.isRequired("#email", "Vui lòng nhập email"),
+    Validator.isEmail("#email"),
+    Validator.isRequired("#password"),
+    Validator.isPassword(
+      "#password",
+      `Mật khẩu từ 6-10 ký tự chứa ít nhất 
+      - 1 ký tự số 
+      - 1 ký tự in hoa 
+      - 1 ký tự đặc biệt`
+    ),
+    Validator.isRequired("#datepicker", "Vui lòng nhập ngày nhận việc"),
+    Validator.isDate("#datepicker"),
+    Validator.amongNumber(
+      "#luongCB",
+      1000000,
+      20000000,
+      "Vui lòng nhập lương cơ bản"
+    ),
+    Validator.isEmployee("#chucvu"),
+    Validator.amongNumber("#gioLam", 80, 200, "Vui lòng nhập số giờ làm"),
+  ],
+});

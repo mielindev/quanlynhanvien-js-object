@@ -19,12 +19,12 @@ function NhanVien(
     (this.gioLam = _gioLam);
   this.tongLuong = () => {
     if (this.chucVu == "Sếp") {
-      return `${(this.luongCb * 3).toLocaleString()}`;
+      return `${this.luongCb * 3}`;
     }
     if (this.chucVu == "Trưởng phòng") {
-      return `${(this.luongCb * 2).toLocaleString()}`;
+      return `${this.luongCb * 2}`;
     }
-    return `${this.luongCb.toLocaleString()}`;
+    return `${this.luongCb}`;
   };
   this.xepLoai = () => {
     if (this.gioLam >= 192) {

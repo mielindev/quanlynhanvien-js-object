@@ -156,7 +156,10 @@
                       id="searchName"
                     />
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="btnTimNV"
+                      <span
+                        class="input-group-text"
+                        onclick="timNv()"
+                        id="btnTimNV"
                         ><i class="fa fa-search"></i
                       ></span>
                     </div>
@@ -214,7 +217,7 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form role="form">
+            <form role="form" id="form-1">
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -372,7 +375,12 @@
             >
               Thêm người dùng
             </button>
-            <button id="btnCapNhat" type="button" class="btn btn-success">
+            <button
+              id="btnCapNhat"
+              onclick="capNhatNv()"
+              type="button"
+              class="btn btn-success"
+            >
               Cập nhật
             </button>
             <button
@@ -414,6 +422,8 @@
         });
       });
     </script>
+    <!-- validate js -->
+    <script src="./js/validator.js"></script>
     <!-- model js -->
     <script src="./js/model.js"></script>
     <!-- controller js -->
